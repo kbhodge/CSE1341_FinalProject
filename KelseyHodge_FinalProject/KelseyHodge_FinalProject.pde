@@ -1,45 +1,45 @@
 /*
 Kelsey Hodge
-Snake Game
-*/
-ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
-int w = 20, h = 20, bs = 30, dir = 2, xapple = 12, yapple = 10;
-int[] dx = {0, 0, 1, -1}, dy = {1, -1, 0, 0};
-boolean gameover=false;
-
-void setup(){
-  size(600,600);
-  background(255);
-  
+ Snake Game
+ */
+Snake snake1 = new Snake();
+boolean gameover = false;
+int xapple, yapple;
+void setup() {
+  size(600, 600);
+  background(0);
 }
 
-void draw(){
-  for(int i=0; i<width; i+=20){
-   line(i,0,i,height);
- }
- for(int w=0; w<height; w+=20){
-   line(0,w,width,w);
- }
- 
-void keyPressed()
-{
-  if(key==CODED)
-  {
-    if(keyCode==UP)
-    {
-  dir=1;
-    }
-    if(keyCode==DOWN)
-    {
-  dir=0;
-    }
-    if(keyCode==RIGHT)
-    {
-  dir=2;
-    }
-    if(keyCode==LEFT)
-    {
-  dir=3;
-    }
+void startGame() {
+  if (key == ' ') {
+    snake1.x1=snake1.x1+2;
   }
+}
+
+void endGame() {
+  if (snake1.x1>width||snake1.y1>height||snake1.x1<(width-width)||snake1.y1<(height%height)) {
+    gameover=true;
+    textSize(30);
+    fill(255);
+    text("GAME OVER", width/3, height/2);
+  }
+}
+
+void drawApple(){
+  if(!gameover){
+  xapple =10;
+  yapple=12;
+  fill(255,0,0);
+  rect(xapple*snake1.bodySize,yapple*snake1.bodySize,snake1.bodySize,snake1.bodySize);
+  }
+}
+
+
+void draw() {
+  //background(0);
+  startGame(); 
+  snake1.drawSnake();
+  snake1.moveSnake();
+  drawApple();
+  endGame();
 }
