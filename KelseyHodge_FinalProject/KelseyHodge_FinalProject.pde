@@ -27,6 +27,22 @@ void endGame() {
   }
 }
 
+void restartGame() {
+  if (gameover) {
+    textSize(30);
+    fill(255, 0, 0);
+    text("Press space to restart!", width/4, height/4);
+    if (keyPressed&&key==' ') {
+      snake1.x.clear();
+      snake1.y.clear();
+      snake1.x.add(5);
+      snake1.y.add(5);
+      gameover=false;
+      score=0;
+    }
+  }
+}
+
 void drawApple() {
   xapple =(int)random(0, w);
   yapple =(int)random(0, h);
@@ -41,17 +57,19 @@ void draw() {
     line(0, i*bs, width, i*bs);   
   snake1.drawSnake();
 
-  if (frameCount%5==0) {
+  if (frameCount%6==0) {
     move=snake1.moveSnake(dir, xapple, yapple);
-    print(move);
   }
   if (move) {
-    println("new apple");
     drawApple();
   }
   fill(255, 0, 0);
   rect(xapple*bs, yapple*bs, 30, 30);
+
+
   endGame();
+  println(score);
+  restartGame();
 }
 void keyPressed() {
   if (key==CODED)
