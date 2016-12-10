@@ -1,6 +1,8 @@
 /*
 Kelsey Hodge
+CSE 1341
  Snake Game
+ Worked with Haya Alhumaid and Declan Magoni, and received help from ALEC tutor (Kena Du)
  */
 
 int dir=0;
@@ -27,21 +29,7 @@ void endGame() {
   }
 }
 
-void restartGame() {
-  if (gameover) {
-    textSize(30);
-    fill(255, 0, 0);
-    text("Press space to restart!", width/4, height/4);
-    if (keyPressed&&key==' ') {
-      snake1.x.clear();
-      snake1.y.clear();
-      snake1.x.add(5);
-      snake1.y.add(5);
-      gameover=false;
-      score=0;
-    }
-  }
-}
+
 
 void drawApple() {
   xapple =(int)random(0, w);
@@ -68,8 +56,8 @@ void draw() {
 
 
   endGame();
-  println(score);
-  restartGame();
+  //println(score);
+  snake1.restartGame();
 }
 void keyPressed() {
   if (key==CODED)

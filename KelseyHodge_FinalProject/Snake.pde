@@ -41,4 +41,19 @@ class Snake {
       return false;
     }
   }
+  void restartGame() {
+  if (gameover) {
+    textSize(30);
+    fill(255, 0, 0);
+    text("Press space to restart!", width/4, height/4);
+    if (keyPressed&&key==' ') {
+      snake1.x.clear();
+      snake1.y.clear();
+      snake1.x.add(5);
+      snake1.y.add(5);
+      gameover=false;
+      score=0;
+    }
+  }
+}
 }
