@@ -1,50 +1,39 @@
-
-
 class Snake {
-  //members- variables of class
-
+  ArrayList<Integer> x = new ArrayList<Integer>(), y = new ArrayList<Integer>();
+  int w = 20, h = 20, bs = 30, score=0;
+  int[] dx = {0, 0, 1, -1}, dy = {1, -1, 0, 0};
   int x1, y1;
 
   int bodySize;
 
 
-  //constructor- intializes the variables or the settnigs of the object that the class creates 
   Snake() {
-
     x1=300;
     y1=300;
-    bodySize= 20;
+    bodySize= 30;
+    x.add(1);
+    y.add(1);
   }
-  //methods- functions 
 
   void drawSnake() {
-    background(0);
-    moveSnake();
-    fill(255);
-    rect(x1, y1, bodySize, bodySize);
+    fill(0);
+    for (int i=0; i<x.size(); i++) {
+      fill(0, 255, 0);
+      rect(x.get(i)*bs, y.get(i)*bs, bs, bs);
+    }
   }
 
-  void moveSnake() {
+  boolean moveSnake(int dir, int xapple, int yapple) {
+    x.add(0, x.get(0)+dx[dir]);
+    y.add(0, y.get(0)+dy[dir]);
 
-    if (key==CODED)
-    {
-      if (keyCode==UP)
-      {
-        y1=y1-2;
-      }
-      if (keyCode==DOWN)
-      {
-        y1=y1+2;
-      }
-      if (keyCode==RIGHT)
-      {
-        x1=x1+2;
-      }
-      if (keyCode==LEFT)
-      {
-        x1=x1-2;
-        ;
-      }
+
+    if (x.get(0)==xapple&&y.get(0)==yapple) {
+      return true;
+    } else {
+      x.remove(x.size()-1);
+      y.remove(y.size()-1);
+      return false;
     }
   }
 }
